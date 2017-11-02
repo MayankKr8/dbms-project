@@ -1,0 +1,80 @@
+{% extends 'myapp/base.html' %}
+{% block title %}Contact Us{% endblock %}
+{% block navbar %}
+
+<div class="icon-bar">
+  <a href="/"><i class="fa fa-home">Home</i></a> 
+  <a href="/sponsor/"><i class="fa fa-handshake-o">Join Hands</i></a> 
+  <a class="active" href="#"><i class="fa fa-envelope">Contact Us</i></a> 
+  <a href="/gallery/"><i class="fa fa-picture-o">Gallery</i></a>
+  {% if user.is_authenticated %}
+  <a href="/logout/"><i class="fa fa-user-circle-o">Logout</i></a>
+  {% else %}
+  <a href="/login/"><i class="fa fa-user-circle-o">Login</i></a>  
+  {% endif %}
+</div>
+{%  endblock %}
+{% block content %}
+<form action="/submit_query/" method="post">{% csrf_token %}
+<div id="sp">Please Fill up this form</div>
+<div class="containerr">
+<label><b>Full Name</b></label>
+<br>
+<input type="text" placeholder="Enter your full name" name="name" required="">
+<br>
+<label><b>Email</b></label>
+<br>
+<input type="text" placeholder="Enter Email" name="email" required="">
+<br>
+<label><b>Mobile</b></label>
+<br>
+<input type="text" placeholder="Please enter your mobile number" name="mobile">
+<br>
+<label><b>Enter Your Query:</b></label>
+<br>
+<input type="text" placeholder="Please enter your message" name="query" required="">
+<br>
+<button type="submit">Submit</button>
+</div>
+</form>
+
+<style>
+form {
+border: 3px solid #f1f1f1;
+width: 60%;
+margin: auto; 
+
+}
+
+input[type=text], input[type=password] {
+width: 85%;
+padding: 12px 20px;
+margin: 8px 0;
+margin-left: 8px;
+display: inline-block;
+border: 1px solid #ccc;
+box-sizing: border-box;
+}
+
+.containerr {
+padding: 16px;
+margin-left: 108px;
+}
+
+#sp{
+  margin: auto;
+  text-align: center;
+font-size: 40px;
+}
+/* Change styles for span and cancel button on extra small screens */
+@media screen and (max-width: 300px) {
+span.psw {
+   display: block;
+   float: none;
+}
+.cancelbtn {
+   width: 75%;
+}
+
+</style>
+{% endblock %}

@@ -1,0 +1,142 @@
+{% extends 'myapp/base.html' %}
+{% load staticfiles %}
+
+{% block title %}{{ value }}{% endblock %}
+
+{% block navbar %}
+<div class="icon-bar">
+  <a href="/"><i class="fa fa-home">Home</i></a> 
+  {% if user.is_authenticated %}
+  <a href="/gallery/"><i class="fa fa-picture-o">Gallery</i></a>
+  <a href="/database/"><i class="fa fa-database">Database</i></a>
+  <a href="/forum/"><i class="fa fa-check-square-o">Forum</i></a>
+  <a href="/logout/"><i class="fa fa-user-circle-o">Logout</i></a>
+  {% else %}
+  <a href="/sponsor/"><i class="fa fa-handshake-o">Join Hands</i></a> 
+  <a href="/contactus/"><i class="fa fa-envelope">Contact Us</i></a> 
+  <a href="/gallery/"><i class="fa fa-picture-o">Gallery</i></a>
+  <a href="/login/"><i class="fa fa-user-circle-o">Login</i></a>  
+  {% endif %}
+  </div>
+{%  endblock %}
+
+  {% if user.is_authenticated %}
+    {% if user.is_superuser %}
+    {% block snavbar %}
+  <div id="mySidenav" class="sidenav">
+      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+      <a href="/new_user/">Add a new user</a>
+      <a href="/new_ctm/">Manage Users</a>
+      <a href="/help_portal/">Attend Querries</a>
+      <a href="/quiz/">Add a quiz</a>
+        <a href="/scores/">Update Scores</a>
+  </div>
+  {%  endblock %}
+  {% endif %}
+  {% endif %}
+
+
+{% block content %}
+{% if user.is_authenticated %}
+{% if user.is_superuser %}
+<div id="main">
+  <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
+</div>
+{% if usercreated %}
+<center><p>Success! User added</p></center>
+{% else %}
+<center><p>Username already taken. Try Agin</p></center>
+{% endif %}
+  <form action="/create_user/" method="post">{% csrf_token %}
+  <div id="sp">Add new user</div>
+  <div class="containerr">
+  <label><b>Full Name</b></label>
+  <br>
+  <input type="text" placeholder="Full Name" name="name" required="">
+  <br>
+  <label><b>Email</b></label>
+  <br>
+  <input type="text" placeholder="Email" name="email" required="">
+  <br>
+  <label><b>Mobile</b></label>
+  <br>
+  <input type="text" placeholder="Mobile number" name="mobile" required="">
+  <br>
+  <label><b>Gender:</b></label>
+  <br>
+  <input type="text" placeholder="Gender" name="gender" required="">
+  <br>
+  <label><b>Department:</b></label>
+  <br>
+  <input type="text" placeholder="Department" name="dpt" required="">
+  <br>
+  <label><b>Year of Study:</b></label>
+  <br>
+  <input type="text" placeholder="Year of study" name="year" required="">
+  <br>
+  <label><b>Mention Interests:</b></label>
+  <br>
+  <input type="text" placeholder="Interests" name="Interest" required="">
+  <br>
+  <label><b>Team Id:</b></label>
+  <br>
+  <input type="text" placeholder="Team_id" name="t_id" required="">
+  <br>
+  <label><b>Password:</b></label>
+  <br>
+  <input type="text" placeholder="Password" name="psw" required="">
+  <br>
+  <button type="submit">Submit</button>
+  </div>
+  </form>
+
+{% else %}
+<div id="main">
+  <p>Please Login with the admin credentials to visit this page</p>
+</div>
+{% endif %}
+{% else %}
+<div id="main">
+  <p>Please Login with the correct credentials to visit this page</p>
+</div>
+{% endif %}
+<style>
+form {
+border: 3px solid #f1f1f1;
+width: 60%;
+margin: auto; 
+
+}
+
+input[type=text], input[type=password] {
+width: 85%;
+padding: 12px 20px;
+margin: 8px 0;
+margin-left: 8px;
+display: inline-block;
+border: 1px solid #ccc;
+box-sizing: border-box;
+}
+
+.containerr {
+padding: 16px;
+margin-left: 108px;
+}
+
+#sp{
+  margin: auto;
+  text-align: center;
+font-size: 40px;
+}
+/* Change styles for span and cancel button on extra small screens */
+@media screen and (max-width: 300px) {
+span.psw {
+   display: block;
+   float: none;
+}
+.cancelbtn {
+   width: 75%;
+}
+
+</style>
+{% endblock %}s

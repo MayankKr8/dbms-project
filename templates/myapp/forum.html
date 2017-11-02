@@ -1,0 +1,79 @@
+{% extends 'myapp/base.html' %}
+{% load staticfiles %}
+
+{% block title %}{{ value }}{% endblock %}
+
+{% block navbar %}
+<div class="icon-bar">
+  <a href="/"><i class="fa fa-home">Home</i></a> 
+  {% if user.is_authenticated %}
+  <a href="/gallery/"><i class="fa fa-picture-o">Gallery</i></a>
+  <a href="/database/"><i class="fa fa-database">Database</i></a>
+  <a class="active" href="/forum/"><i class="fa fa-check-square-o">Forum</i></a>
+  <a href="/logout/"><i class="fa fa-user-circle-o">Logout</i></a>
+  {% else %}
+  <a href="#"><i class="fa fa-handshake-o">Join Hands</i></a> 
+  <a href="/contactus/"><i class="fa fa-envelope">Contact Us</i></a> 
+  <a href="/gallery/"><i class="fa fa-picture-o">Gallery</i></a>
+  <a href="/login/"><i class="fa fa-user-circle-o">Login</i></a>  
+  {% endif %}
+  </div>
+{%  endblock %}
+
+  {% if user.is_authenticated %}
+  	{% if user.is_superuser %}
+  	{% block snavbar %}
+	<div id="mySidenav" class="sidenav">
+  		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+  		<a href="/new_user/">Add a new user</a>
+  		<a href="/new_ctm/">Manage users</a>
+  		<a href="/help_portal/">Attend Querries</a>
+      <a href="/quiz/">Add a quiz</a>
+      <a href="/scores/">Update Scores</a>
+	</div>
+	{%  endblock %}
+	{% endif %}
+  {% endif %}
+
+
+{% block content %}
+{% if user.is_authenticated %}
+{% if user.is_staff %}
+<div id="main">
+        <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
+</div>
+<div class="container">
+  <form class="form-inline" action="/create_post/" method="post">{% csrf_token %}
+    <div class="form-group">
+      <label for="email">Admin Id:</label>
+      <input type="text" class="form-control" id="email" placeholder="ID" name="Id" required="">
+    </div>
+    <div class="form-group">
+      <label for="pwd">Date:</label>
+      <input type="text" class="form-control" id="pwd" placeholder="YYYY-MM-DD" name="date" required="">
+    </div>
+    <div class="form-group">
+      <label for="pwd">Post:</label>
+      <input type="text" class="form-control" id="pwd" placeholder="Content" name="pst" required="">
+    </div>
+    <button type="submit" class="btn btn-default">Create Post</button>
+  </form>
+</div>
+{% endif %}
+{% for product in products %}
+<div id="sp">Post Number {{ product.pid }} </div>
+<div class="containerr">
+<label><b>Posted by {{ product.aid }}</b></label>
+<label><b>Date:{{ product.date }} </b></label>
+<br>
+<label><b>{{ product.cont }}</b></label>
+</div>
+<br>
+ {% endfor %}
+{% else %}
+<div id="main">
+  <p>Please Login with the correct credentials to visit this page</p>
+</div>
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,126 @@
+{% extends 'myapp/base.html' %}
+{% load staticfiles %}
+
+{% block title %}{{ value }}{% endblock %}
+
+{% block navbar %}
+<div class="icon-bar">
+  <a href="/"><i class="fa fa-home">Home</i></a> 
+  {% if user.is_authenticated %}
+  <a href="/gallery/"><i class="fa fa-picture-o">Gallery</i></a>
+  <a href="/database/"><i class="fa fa-database">Database</i></a>
+  <a href="/forum/"><i class="fa fa-check-square-o">Forum</i></a>
+  <a href="/logout/"><i class="fa fa-user-circle-o">Logout</i></a>
+  {% else %}
+  <a href="/sponsor/"><i class="fa fa-handshake-o">Join Hands</i></a> 
+  <a href="/contactus/"><i class="fa fa-envelope">Contact Us</i></a> 
+  <a href="/gallery/"><i class="fa fa-picture-o">Gallery</i></a>
+  <a href="/login/"><i class="fa fa-user-circle-o">Login</i></a>  
+  {% endif %}
+  </div>
+{%  endblock %}
+
+  {% if user.is_authenticated %}
+    {% if user.is_superuser %}
+    {% block snavbar %}
+  <div id="mySidenav" class="sidenav">
+      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+      <a href="/new_user/">Add a new user</a>
+      <a href="/new_ctm/">Manage Users</a>
+      <a href="/help_portal/">Attend Querries</a>
+      <a href="/quiz/">Add a quiz</a>
+      <a href="/scores/">Update Scores</a>
+      <a href="/create_post/">Create a post</a>
+  </div>
+  {%  endblock %}
+  {% endif %}
+  {% endif %}
+
+
+{% block content %}
+{% if user.is_authenticated %}
+{% if user.is_superuser %}
+<div id="main">
+  <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
+</div>
+ <form action="/create_ctm/" method="post">{% csrf_token %}
+  <div id="sp">Add a core team member</div>
+  <div class="containerr">
+  <label><b>Username</b></label>
+  <br>
+  <input type="text" placeholder="Username" name="uname" required="">
+  <br>
+  <button type="submit">Submit</button>
+  </div>
+  </form>
+  <form action="/remove_ctm1/" method="post">{% csrf_token %}
+  <div id="sp">Remove a Core team member</div>
+  <div class="containerr">
+  <label><b>Username</b></label>
+  <br>
+  <input type="text" placeholder="Username" name="uname" required="">
+  <br>
+  <button type="submit">Submit</button>
+  </div>
+  </form>
+  <form action="/remove_user1/" method="post">{% csrf_token %}
+  <div id="sp">Remove a user</div>
+  <div class="containerr">
+  <label><b>Username</b></label>
+  <br>
+  <input type="text" placeholder="Username" name="uname" required="">
+  <br>
+  <button type="submit">Submit</button>
+  </div>
+  </form>
+{% else %}
+<div id="main">
+  <p>Please Login with the admin credentials to visit this page</p>
+</div>
+{% endif %}
+{% else %}
+<div id="main">
+  <p>Please Login with the correct credentials to visit this page</p>
+</div>
+{% endif %}
+<style>
+form {
+border: 3px solid #f1f1f1;
+width: 60%;
+margin: auto; 
+
+}
+
+input[type=text], input[type=password] {
+width: 85%;
+padding: 12px 20px;
+margin: 8px 0;
+margin-left: 8px;
+display: inline-block;
+border: 1px solid #ccc;
+box-sizing: border-box;
+}
+
+.containerr {
+padding: 16px;
+margin-left: 108px;
+}
+
+#sp{
+  margin: auto;
+  text-align: center;
+font-size: 40px;
+}
+/* Change styles for span and cancel button on extra small screens */
+@media screen and (max-width: 300px) {
+span.psw {
+   display: block;
+   float: none;
+}
+.cancelbtn {
+   width: 75%;
+}
+
+</style>
+
+{% endblock %}s

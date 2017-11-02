@@ -1,0 +1,31 @@
+{% extends 'myapp/base.html' %}
+{% load staticfiles %}
+
+{% block title %}{{ value }}{% endblock %}
+
+{% block navbar %}
+
+<div class="icon-bar">
+  <a href="/"><i class="fa fa-home">Home</i></a> 
+  <a class="active" href="/sponsor/"><i class="fa fa-handshake-o">Join Hands</i></a> 
+  <a href="/contactus/"><i class="fa fa-envelope">Contact Us</i></a> 
+  <a href="/gallery/"><i class="fa fa-picture-o">Gallery</i></a>
+  <a href="/login/"><i class="fa fa-user-circle-o">Log In</i></a>  
+  </div>
+{%  endblock %}
+
+{% block content %}
+<ul>
+    <li><a href="/tools/">Register as a Sponsor</a></li>
+    <li><a href="/orders/">Projects</a></li>
+    <li><a href="/contacts/">Record a Funding</a></li>
+</ul>
+<h1 align = "center">Our Vision</h1>
+<p class="container" style="font-size:160%;">
+
+Our vision is to bring together students from all segments of engineering, to a common platform, for the purpose of learning and understanding the basics of automobiles and automobile industry. Our aim is to set up an atmosphere for promotion of technical skills by providing industrial experience. Enhancement of practical knowledge through projects relating to real life examples would be our primary focus.
+</p><p class="container" style="font-size:160%;">
+We would be organizing highly interactive sessions with professionals from this fieldby collaborating with various committees and renowned industries. Our goal will be to enhance formal education and professional development. Also, we will be conducting various career enhancement sessions.
+</p>
+
+{% endblock %}

@@ -1,0 +1,150 @@
+{% extends 'myapp/base.html' %}
+{% load staticfiles %}
+
+{% block title %}{{ value }}{% endblock %}
+
+{% block navbar %}
+<div class="icon-bar">
+  <a href="/"><i class="fa fa-home">Home</i></a> 
+  {% if user.is_authenticated %}
+  <a href="/gallery/"><i class="fa fa-picture-o">Gallery</i></a>
+  <a class="active" href="/database/"><i class="fa fa-database">Database</i></a>
+  <a href="/forum/"><i class="fa fa-check-square-o">Forum</i></a>
+  <a href="/logout/"><i class="fa fa-user-circle-o">Logout</i></a>
+  {% else %}
+  <a href="/sponsor/"><i class="fa fa-handshake-o">Join Hands</i></a> 
+  <a href="/contactus/"><i class="fa fa-envelope">Contact Us</i></a> 
+  <a href="/gallery/"><i class="fa fa-picture-o">Gallery</i></a>
+  <a href="/login/"><i class="fa fa-user-circle-o">Login</i></a>  
+  {% endif %}
+  </div>
+{%  endblock %}
+
+  {% if user.is_authenticated %}
+  	{% if user.is_superuser %}
+  	{% block snavbar %}
+	<div id="mySidenav" class="sidenav">
+  		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+  		<a href="/new_user/">Add a new user</a>
+  		<a href="/new_ctm/">Add a core team member</a>
+  		<a href="/help_portal/">Attend Querries</a>
+      <a href="/quiz/">Add a quiz</a>
+        <a href="/scores/">Update Scores</a>
+	</div>
+	{%  endblock %}
+	{% endif %}
+  {% endif %}
+
+
+{% block content %}
+{% if user.is_authenticated %}
+<div id="main">
+  <ul>
+    {% if user.is_superuser %}
+    <li>
+        <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
+      </li>
+    {% endif %}
+   <li><a href="/tools/">Tools</a></li>
+    <li><a href="/orders/">Orders</a></li>
+    <li><a href="/contacts/">Contacts</a></li>
+    <li><a href="/users/">Users</a></li>
+  </ul>
+</div>
+{% if user.is_staff %}
+<div class="container">
+  <form class="form-inline" action="/add_tool1/" method="post">{% csrf_token %}
+    <div class="form-group">
+      <label for="email">Name:</label>
+      <input type="text" class="form-control" id="email" placeholder="Name" name="name" required="">
+    </div>
+    <div class="form-group">
+      <label for="pwd">Status:</label>
+      <input type="text" class="form-control" id="pwd" placeholder="status" name="stat" required="">
+    </div>
+    <div class="form-group">
+      <label for="pwd">Price:</label>
+      <input type="text" class="form-control" id="pwd" placeholder="price" name="price" required="">
+    </div>
+    <button type="submit" class="btn btn-default">Add Tool</button>
+  </form>
+</div>
+<br>
+<div class="container">
+  <form class="form-inline" action="/tool_issue/" method="post">{% csrf_token %}
+    <div class="form-group">
+      <label for="email">Tool_id:</label>
+      <input type="text" class="form-control" id="email" placeholder="ID" name="id" required="">
+    </div>
+    <div class="form-group">
+      <input type="hidden" class="form-control" id="pwd" placeholder="status" name="stat" value = "issued" required="">
+    </div>
+    <div class="form-group">
+      <label for="pwd">Issued_by:</label>
+      <input type="text" class="form-control" id="pwd" placeholder="ID" name="iby" required="">
+    </div>
+    <div class="form-group">
+      <label for="pwd">Issued_to:</label>
+      <input type="text" class="form-control" id="pwd" placeholder="ID" name="ito" required="">
+    </div>
+    <br>
+    <div class="form-group">
+      <label for="pwd">Date fo issue:</label>
+      <input type="text" class="form-control" id="pwd" placeholder="YYYY-MM-DD" name="date" required="">
+    </div>
+    <button type="submit" class="btn btn-default">Issue Tool</button>
+  </form>
+</div>
+<br>
+<div class="container">
+  <form class="form-inline" action="/tool_return/" method="post">{% csrf_token %}
+    <div class="form-group">
+      <label for="email">Log Id:</label>
+      <input type="text" class="form-control" id="email" placeholder="Name" name="name" required="">
+    </div>
+    <div class="form-group">
+      <input type="hidden" class="form-control" id="pwd" placeholder="status" name="stat" value = "inventory" required="">
+    </div>
+    <div class="form-group">
+      <label for="pwd">Date fo return:</label>
+      <input type="text" class="form-control" id="pwd" placeholder="YYYY-MM-DD" name="date" required="">
+    </div>
+    <button type="submit" class="btn btn-default">Return Tool</button>
+  </form>
+</div>
+{% endif %}
+<div style="overflow-x:auto;">
+  <table>
+    <tr>
+      <th>Tool_id</th>
+      <th>Name</th>
+      <th>Status</th>
+      <th>Price</th>
+      <th>Log_id</th>
+      <th>Issued By</th>
+      <th>Issued To</th>
+      <th>Date of Issue</th>
+      <th>Date of Return</th>
+    </tr>
+    {% for product in products %}
+     <tr>
+      <td>{{ product.tid }}</td>
+      <td>{{ product.name }}</td>
+      <td>{{ product.stat }}</td>
+      <td>{{ product.price }}</td>
+      <td>{{ product.lid }}</td>
+      <td>{{ product.iby }}</td>
+      <td>{{ product.ito }}</td>
+      <td>{{ product.doi }}</td>
+      <td>{{ product.dor }}</td>
+    </tr>
+     {% endfor %}
+  </table>
+</div>
+{% else %}
+<div id="main">
+  <p>Please Login with the correct credentials to visit this page</p>
+</div>
+{% endif %}
+
+{% endblock %}s
