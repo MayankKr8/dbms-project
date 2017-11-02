@@ -63,11 +63,23 @@
     <button type="submit" class="btn btn-default">Add Evaluation</button>
   </form>
 </div>
-{% else %}
+  {% else %}
 <div id="main">
-  <p>Please Login with the admin credentials to visit this page</p>
+  <div style="overflow-x:auto;">
+  <table>
+    <tr>
+      <th>Quiz Id</th>
+      <th>Max Marks</th>
+      <th>Date</th>
+      <th>Your Marks</th>
+      <th>Rank</th>
+      <th>Comments</th>
+    </tr>
+  </table>
+</div>
 </div>
 {% endif %}
+</div>
 {% else %}
 <div id="main">
   <p>Please Login with the correct credentials to visit this page</p>

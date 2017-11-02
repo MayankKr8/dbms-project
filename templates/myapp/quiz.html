@@ -66,21 +66,14 @@
       <th>Date</th>
       <th>Comments</th>
     </tr>
-  </table>
-</div>
-</div>
-{% else %}
-<div id="main">
-  <div style="overflow-x:auto;">
-  <table>
-    <tr>
-      <th>Quiz Id</th>
-      <th>Max Marks</th>
-      <th>Date</th>
-      <th>Your Marks</th>
-      <th>Rank</th>
-      <th>Comments</th>
+    {% for product in products %}
+     <tr>
+      <td>{{ product.quid }}</td>
+      <td>{{ product.marks }}</td>
+      <td>{{ product.date }}</td>
+      <td>{{ product.cmnts }}</td>    
     </tr>
+     {% endfor %}
   </table>
 </div>
 </div>

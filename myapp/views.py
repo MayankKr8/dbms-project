@@ -51,7 +51,25 @@ def new_user(request):
 def new_ctm(request):
       return render(request,'myapp/add_new_ctm.html',{})
 def help_p(request):
-      return render(request,'myapp/help.html',{})
+      query = """ select * from help"""
+      template = loader.get_template('myapp/help.html')
+      cursor=connection.cursor() 
+      cursor.execute(query)
+      entries = []
+      class help_db:
+        def __init__(self,hid,aid,name,cont,email,stat,cntn):
+            self.hid = hid
+            self.aid = aid
+            self.name = name
+            self.cont = cont
+            self.email = email
+            self.stat = stat
+            self.cntn = cntn
+      for row in cursor:
+            entries.append(help_db(row[0],row[1],row[2],row[3],row[4],row[5],row[6]))
+      context = {'loggedin':0}
+      context['products']=entries
+      return HttpResponse(template.render(context,request))
 def database(request):
       return render(request,'myapp/database.html',{})
 def gallery(request):
@@ -76,9 +94,41 @@ def forum(request):
 def sponsor(request):
       return render(request,'myapp/sponsor.html',{})
 def quiz(request):
-      return render(request,'myapp/quiz.html',{})
+      query = """ select * from quiz"""
+      template = loader.get_template('myapp/quiz.html')
+      cursor=connection.cursor() 
+      cursor.execute(query)
+      entries = []
+      class quiz_db:
+        def __init__(self,quid,marks,date,cmnts):
+            self.quid = quid
+            self.marks = marks
+            self.date = date
+            self.cmnts = cmnts
+      for row in cursor:
+            entries.append(quiz_db(row[0],row[1],row[2],row[3]))
+      context = {'loggedin':0}
+      context['products']=entries
+      return HttpResponse(template.render(context,request))
 def scores(request):
-      return render(request,'myapp/Scorecard.html',{})
+      query = """ select b.quiz_id, a.marks,a.date,b.marks,b.rank,a.comments from quiz as a right outer join evaluation as b on a.quiz_id=b.quiz_id where b.user_id=1"""
+      template = loader.get_template('myapp/Scorecard.html')
+      cursor=connection.cursor() 
+      cursor.execute(query)
+      entries = []
+      class scores_db:
+        def __init__(self,quid,marks,date,mark,rank,cmnts):
+            self.quid = quid
+            self.marks = marks
+            self.date = date
+            self.mark = mark
+            self.rank = rank
+            self.cmnts = cmnts
+      for row in cursor:
+            entries.append(scores_db(row[0],row[1],row[2],row[3],row[4],row[5]))
+      context= {'loggedin':0}
+      context['products']=entries
+      return HttpResponse(template.render(context,request))
 def create_user(request):
     username = request.POST.get('email', None)
     password = request.POST.get('psw', None)
@@ -92,6 +142,7 @@ def create_user(request):
     Team = request.POST.get('t_id', None)
     template = loader.get_template('myapp/add_new_user.html')
     context = {'usercreated':0}
+    context = {'usercreatedf':0}
     if username and password:
         user, created = User.objects.get_or_create(username=username, email=username)
         if created:
@@ -105,7 +156,11 @@ def create_user(request):
                   }
               return HttpResponse(template.render(context,request))
         else:
-               return HttpResponse(template.render(context,request))
+              context = {
+                  'usercreatedf': 1,
+                  }
+              
+              return HttpResponse(template.render(context,request))
 def remove_user1(request):
     username = request.POST.get('uname', None)
     if username:
@@ -120,6 +175,7 @@ def remove_user1(request):
               return HttpResponseRedirect('/new_ctm/')            
 def create_ctm(request):
       username = request.POST.get('uname', None)
+      pos = request.POST.get('pos', None)
       if username:
         user, created = User.objects.get_or_create(username=username, email=username)
         if created:
@@ -129,6 +185,8 @@ def create_ctm(request):
         else:
               user.is_staff = True
               user.save()
+              cursor=connection.cursor() 
+              cursor.execute("""insert into core_team(User_id,position)VALUES(%s,%s)""",(user.id,pos))
               return HttpResponseRedirect('/new_ctm/')
 def remove_ctm1(request):
       username = request.POST.get('uname', None)
@@ -142,6 +200,8 @@ def remove_ctm1(request):
               print("Debug")
               user.is_staff = False
               user.save()
+              cursor=connection.cursor() 
+              cursor.execute("""delete from core_team where User_id  = %s""",[user.id])
               return HttpResponseRedirect('/new_ctm/')
 def tools(request):
       query = """select a.tool_id,name,status,price,log_id,issued_by,issued_to,date_of_issue,date_of_return from tools as a left outer join issue_log as b on a.tool_id = b.Tool_id;"""
@@ -270,10 +330,11 @@ def submit_query(request):
       return HttpResponseRedirect('/contactus/')
 def update_help(request):
       hid = request.POST.get('id', None)
-      stat = request.POST.get('Status', None)
-      aid = request.POST.get('aid', None)
+      stat = request.POST.get('status', None)
+      aid = request.user.id
+      print(stat)
       cursor=connection.cursor() 
-      cursor.execute("""update help set status = %s, Admin_id = %s""",(stat,int(aid)))
+      cursor.execute("""update help set status = %s, Admin_id = %s""",(stat,aid))
       return HttpResponseRedirect('/help_portal/')
 def create_post(request):
       pid = request.POST.get('Id', None)

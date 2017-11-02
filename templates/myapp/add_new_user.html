@@ -44,8 +44,9 @@
 </div>
 {% if usercreated %}
 <center><p>Success! User added</p></center>
-{% else %}
-<center><p>Username already taken. Try Agin</p></center>
+{% endif %}
+{% if usercreatedf %}
+<center><p>Username already taken. Try Again</p></center>
 {% endif %}
   <form action="/create_user/" method="post">{% csrf_token %}
   <div id="sp">Add new user</div>
