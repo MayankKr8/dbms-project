@@ -31,6 +31,7 @@
 	  		<a href="/help_portal/">Attend Querries</a>
 	  		<a href="/quiz/">Add a quiz</a>
 	      <a href="/scores/">Update Scores</a>
+        <a href="/profunds/">Manage Projects and funds</a>
 
 		</div>
 
@@ -46,7 +47,15 @@
 </div>
 
 {% endif %}
+<ul>
+    {% if user.is_superuser %}
+    {% else %}
+    <li><a href="/show_id/">Profile</a></li>
+   <li><a href="/scores/">My Scores</a></li>
+  </ul>
+  {% endif %}
 {% endif %}
+<br>
 <div class="container">  
   <div id="myCarousel" class="carousel slide" data-ride="carousel">
     <!-- Indicators -->

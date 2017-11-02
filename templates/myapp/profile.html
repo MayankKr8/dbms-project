@@ -1,0 +1,85 @@
+{% extends 'myapp/base.html' %}
+{% load staticfiles %}
+
+{% block title %}{{ value }}{% endblock %}
+
+{% block navbar %}
+
+<div class="icon-bar">
+  <a class="active" href="/"><i class="fa fa-home">Home</i></a> 
+  {% if user.is_authenticated %}
+  <a href="/gallery/"><i class="fa fa-picture-o">Gallery</i></a>
+  <a href="/database/"><i class="fa fa-database">Database</i></a>
+  <a href="/forum/"><i class="fa fa-check-square-o">Forum</i></a>
+  <a href="/logout/"><i class="fa fa-user-circle-o">Logout</i></a>
+  {% else %}
+  <a href="/sponsor/"><i class="fa fa-handshake-o">Join Hands</i></a> 
+  <a href="/contactus/"><i class="fa fa-envelope">Contact Us</i></a> 
+  <a href="/gallery/"><i class="fa fa-picture-o">Gallery</i></a>
+  <a href="/login/"><i class="fa fa-user-circle-o">Login</i></a>  
+  {% endif %}
+  </div>
+{%  endblock %}
+{% block snavbar %}
+  {% if user.is_authenticated %}
+  	{% if user.is_superuser %}
+  	
+		<div id="mySidenav" class="sidenav">
+	  		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+	  		<a href="/new_user/">Add a new user</a>
+	  		<a href="/new_ctm/">Manage Users</a>
+	  		<a href="/help_portal/">Attend Querries</a>
+	  		<a href="/quiz/">Add a quiz</a>
+	      <a href="/scores/">Update Scores</a>
+
+		</div>
+
+	{% endif %}
+  {% endif %}
+{%  endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+{% if user.is_superuser %}
+<div id="main">
+        <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
+</div>
+
+{% endif %}
+<ul>
+    {% if user.is_superuser %}
+    {% else %}
+   <li><a href="/scores/">My Scores</a></li>
+  </ul>
+
+  {% endif %}
+  <div id="main">
+  {% for product in products %}
+  <label><b>Your Id &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></label><label><b>{{ product.uid }}</b></label>
+  <br>
+  <label><b>Full Name &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></label><label><b>{{ product.name }}</b></label>
+  <br>
+  <label><b>Team Name &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></label><label><b>{{ product.team }}</b></label>
+  <br>
+  <label><b>Email &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></label><label><b>{{ product.email }}</b></label>
+  <br>
+  <label><b>Mobile &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></label><label><b>{{ product.cont }}</b></label>
+  <br>
+  <label><b>Gender: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></label><label><b>{{ product.gender }}</b></label>
+  <br>
+  <label><b>Department: &nbsp;&nbsp;&nbsp;&nbsp;</b></label><label><b>{{ product.depart }}</b></label>
+  <br>
+  <label><b>Year of Study: &nbsp;&nbsp;</b></label><label><b>{{ product.year }}</b></label>
+  <br>
+  <label><b>Interests: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></label><label><b>{{ product.inter }}</b></label>
+  <br>
+  {% endfor %}
+  </div>
+{% else %}
+<div id="main">
+      <p>Login with valid credentials to view this page</p>
+</div>
+{% endif %}
+
+
+{% endblock %}

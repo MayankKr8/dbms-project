@@ -75,6 +75,16 @@
       <th>Rank</th>
       <th>Comments</th>
     </tr>
+    {% for product in products %}
+     <tr>
+      <td>{{ product.quid }}</td>
+      <td>{{ product.marks }}</td>
+      <td>{{ product.date }}</td>
+      <td>{{ product.mark }}</td>
+      <td>{{ product.rank }}</td>
+      <td>{{ product.cmnts }}</td>
+    </tr>
+     {% endfor %}
   </table>
 </div>
 </div>

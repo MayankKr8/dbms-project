@@ -16,16 +16,91 @@
 
 {% block content %}
 <ul>
-    <li><a href="/tools/">Register as a Sponsor</a></li>
-    <li><a href="/orders/">Projects</a></li>
-    <li><a href="/contacts/">Record a Funding</a></li>
+    <li><a href="/reg_spo/">Register as a Sponsor</a></li>
+    <li><a href="/pro_jects/">Projects</a></li>
+    <li><a href="/rec_fund/">Record a Funding</a></li>
 </ul>
-<h1 align = "center">Our Vision</h1>
-<p class="container" style="font-size:160%;">
 
-Our vision is to bring together students from all segments of engineering, to a common platform, for the purpose of learning and understanding the basics of automobiles and automobile industry. Our aim is to set up an atmosphere for promotion of technical skills by providing industrial experience. Enhancement of practical knowledge through projects relating to real life examples would be our primary focus.
-</p><p class="container" style="font-size:160%;">
-We would be organizing highly interactive sessions with professionals from this fieldby collaborating with various committees and renowned industries. Our goal will be to enhance formal education and professional development. Also, we will be conducting various career enhancement sessions.
-</p>
+<style>
+form {
+    border: 3px solid #f1f1f1;
+}
+
+input[type=text], input[type=password] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+.cancelbtn {
+    width: auto;
+    padding: 10px 18px;
+    background-color: #f44336;
+}
+
+.imgcontainer {
+    text-align: center;
+    margin: 24px 0 12px 0;
+}
+
+img.avatar {
+    width: 12%;
+    border-radius: 50%;
+}
+
+
+span.psw {
+    float: right;
+    padding-top: 16px;
+}
+
+/* Change styles for span and cancel button on extra small screens */
+@media screen and (max-width: 300px) {
+    span.psw {
+       display: block;
+       float: none;
+    }
+    .cancelbtn {
+       width: 100%;
+    }
+}
+</style>
+
+<div class="jumbotron">
+<form action="/add_sponsor1/" method="post">
+  {% csrf_token %}
+<center><p>Your Sponsor_id is {{ id }}</p></center>
+  <div class="imgcontainer">
+      <h2>Join us as a Sponsor</h2>
+  </div>
+
+  <div class="container">
+    <label><b>Name</b></label>
+    <input type="text" placeholder="Enter Nmae" name="uname" required>
+
+    <label><b>email</b></label>
+    <input type="text"  name="email" required>
+    <label><b>Description</b></label>
+    <input type="text"  name="des" required>
+    <label><b>Contact No.</b></label>
+    <input type="text"  name="cont" required>
+
+    <button type="submit">Register</button>
+  </div>
+</form>
+</div>
 
 {% endblock %}

@@ -45,10 +45,6 @@
 <div class="container">
   <form class="form-inline" action="/create_post/" method="post">{% csrf_token %}
     <div class="form-group">
-      <label for="email">Admin Id:</label>
-      <input type="text" class="form-control" id="email" placeholder="ID" name="Id" required="">
-    </div>
-    <div class="form-group">
       <label for="pwd">Date:</label>
       <input type="text" class="form-control" id="pwd" placeholder="YYYY-MM-DD" name="date" required="">
     </div>
@@ -64,6 +60,7 @@
 <div id="sp">Post Number {{ product.pid }} </div>
 <div class="containerr">
 <label><b>Posted by {{ product.aid }}</b></label>
+<br>
 <label><b>Date:{{ product.date }} </b></label>
 <br>
 <label><b>{{ product.cont }}</b></label>

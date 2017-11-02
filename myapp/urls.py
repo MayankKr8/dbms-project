@@ -48,5 +48,17 @@ urlpatterns = [
     url(r'add_orderse/$',views.add_order,name="add_order"),
     url(r'add_tool1/$',views.add_tool,name="add_tool"),
     url(r'tool_issue/$',views.issue_tool,name="tool issue"),
+    url(r'reg_spo/$',views.reg_spo,name="refspo"),
+    url(r'pro_jects/$',views.pro,name="projectx"),
+    url(r'rec_fund/$',views.rec_fund,name="fund"),
     url(r'tool_return/$',views.return_tool,name="ool return"),
+    url(r'add_funds/$',views.add_fund,name="add fund"),
+    url(r'show_id/$',views.show_id,name="ds fund"),
+    url(r'profunds/$',views.profunds,name="dsk fund"),
+    url(r'add_proj1/$',views.add_proj1,name="add fund"),
+    url(r'remove_proj1/$',views.remove_proj1,name="ds fund"),
+    url(r'verfunds1/$',views.verfunds1,name="dsk fund"),
+    url(r'add_sponsor1/$',views.add_sponsor,name="dsk5 fund"),
+    
+    
 ]

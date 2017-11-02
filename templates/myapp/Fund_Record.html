@@ -16,16 +16,31 @@
 
 {% block content %}
 <ul>
-    <li><a href="/tools/">Register as a Sponsor</a></li>
-    <li><a href="/orders/">Projects</a></li>
-    <li><a href="/contacts/">Record a Funding</a></li>
+   <li><a href="/reg_spo/">Register as a Sponsor</a></li>
+    <li><a href="/pro_jects/">Projects</a></li>
+    <li><a href="/rec_fund/">Record a Funding</a></li>
 </ul>
-<h1 align = "center">Our Vision</h1>
-<p class="container" style="font-size:160%;">
-
-Our vision is to bring together students from all segments of engineering, to a common platform, for the purpose of learning and understanding the basics of automobiles and automobile industry. Our aim is to set up an atmosphere for promotion of technical skills by providing industrial experience. Enhancement of practical knowledge through projects relating to real life examples would be our primary focus.
-</p><p class="container" style="font-size:160%;">
-We would be organizing highly interactive sessions with professionals from this fieldby collaborating with various committees and renowned industries. Our goal will be to enhance formal education and professional development. Also, we will be conducting various career enhancement sessions.
-</p>
+<br>
+{% if inserted %}
+<center><p>Success!</p></center>
+{% endif %}
+<br>
+<div class="container">
+  <form class="form-inline" action="/add_funds/" method="post">{% csrf_token %}
+    <div class="form-group">
+      <label for="email">Sponsor Id:</label>
+      <input type="text" class="form-control" id="email" placeholder="sid" name="sid" required="">
+    </div>
+    <div class="form-group">
+      <label for="pwd">Project Id:</label>
+      <input type="text" class="form-control" id="pwd" placeholder="pid" name="pid" required="">
+    </div>
+    <div class="form-group">
+      <label for="pwd">Transaction Id:</label>
+      <input type="text" class="form-control" id="pwd" placeholder="tid" name="tid" required="">
+    </div>
+    <button type="submit" class="btn btn-default">Submit</button>
+  </form>
+</div>
 
 {% endblock %}

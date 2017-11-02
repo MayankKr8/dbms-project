@@ -16,16 +16,43 @@
 
 {% block content %}
 <ul>
-    <li><a href="/tools/">Register as a Sponsor</a></li>
-    <li><a href="/orders/">Projects</a></li>
-    <li><a href="/contacts/">Record a Funding</a></li>
+    <li><a href="/reg_spo/">Register as a Sponsor</a></li>
+    <li><a href="/pro_jects/">Projects</a></li>
+    <li><a href="/rec_fund/">Record a Funding</a></li>
 </ul>
-<h1 align = "center">Our Vision</h1>
-<p class="container" style="font-size:160%;">
+<div style="overflow-x:auto;">
+  <table>
+    <tr>
+      <th>Project Id</th>
+      <th>Name</th>
+      <th>Team Id</th>
+      <th>Price</th>
+      <th>Fund</th>
+    </tr>
+    {% for product in products %}
+     <tr>
+      <td><div id ="uid">{{ product.uid }}</div></td>
+      <td><div id = "name">{{ product.name }}</div></td>
+      <td>{{ product.team }}</td>
+      <td><div id = "val">{{ product.price }}</div></td>
+  	   <script src= "https://www.payumoney.com/Api/REST/op/buttonScript" async="true" > </script>
+<script>function my_function(){
+window.PUM.setData(document.getElementById("val").innerHTML, document.getElementById("uid").innerHTML,document.getElementById("name").innerHTML);
+window.PUM.pay()}
+</script>
+      <td><span class='pm-button' id='C92C60A1963C36827CF147EA23851C36' onclick="my_function()">
+  <span class="state active">
+    <input type="image" src="https://file.payumoney.com/images/payby_payumoney/new_buttons/21.png" width="131" height="37">
+  </span>
+  <span class="state clicked" style="display:none" >
+    <input type="image" src="https://file.payumoney.com/images/payby_payumoney/new_buttons/submitted/21.png" width="131" height="37">
+  </span>
+</span>
+</td>
 
-Our vision is to bring together students from all segments of engineering, to a common platform, for the purpose of learning and understanding the basics of automobiles and automobile industry. Our aim is to set up an atmosphere for promotion of technical skills by providing industrial experience. Enhancement of practical knowledge through projects relating to real life examples would be our primary focus.
-</p><p class="container" style="font-size:160%;">
-We would be organizing highly interactive sessions with professionals from this fieldby collaborating with various committees and renowned industries. Our goal will be to enhance formal education and professional development. Also, we will be conducting various career enhancement sessions.
-</p>
+    </tr>
+     {% endfor %}
+  </table>
+
 
 {% endblock %}

@@ -141,7 +141,7 @@ CREATE TABLE `auth_user` (
   `date_joined` datetime(6) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -150,7 +150,7 @@ CREATE TABLE `auth_user` (
 
 LOCK TABLES `auth_user` WRITE;
 /*!40000 ALTER TABLE `auth_user` DISABLE KEYS */;
-INSERT INTO `auth_user` VALUES (1,'pbkdf2_sha256$36000$o5LsPnPFBiGi$te/mDIky1/JFFKmZ137Ge8VCHVcRkRnfSpEA1c4QOkY=','2017-11-01 10:33:29.865515',1,'Mayank','','','mayank.hawk@gmail.com',1,1,'2017-10-30 19:13:31.133318'),(2,'pbkdf2_sha256$36000$ErP3pCCuHU76$1DFWSaPQUADBZHrKcvi1G7y93peMlzS+mwZChzHv2T0=','2017-11-02 11:45:44.799641',1,'Secretary','','','',1,1,'2017-11-01 04:08:39.189978'),(3,'pbkdf2_sha256$36000$ixudnPhcXB9O$EJ9Ca65ov4o97DdpcVvtM9WcmKDh/ax7WJQ7eao8fDs=',NULL,1,'Joint_secretary1','','','',1,1,'2017-11-01 04:09:23.790501'),(4,'pbkdf2_sha256$36000$vhGhqA48chdl$G3h0796iCollKAIPYX5nrbTAOfUsLmHFb0ROTtJDTzU=',NULL,1,'Joint_secretary2','','','',1,1,'2017-11-01 04:10:11.352020'),(6,'pbkdf2_sha256$36000$GtTKcWvP6S62$y6r7qeWSEpi8BCdzNCxgh8aGi6fHNMmGVUyvU7ppVfI=','2017-11-01 15:23:23.593309',0,'karan','','','karan',0,1,'2017-11-01 05:42:25.501929'),(7,'pbkdf2_sha256$36000$KRnjce28mpAk$dxUK/wL/pf714QFpgCKtVjGJGBarjum+P8ofiplw+l8=','2017-11-02 06:29:39.466045',0,'Dhawal','','','Dhawal',1,1,'2017-11-01 05:49:29.047051'),(42,'pbkdf2_sha256$36000$UWinV9i17YHq$xk62k/e5wCTy0kBSOJAKKsP1FPkweH9Nb0YZAz+YzYc=',NULL,0,'ketan','','','ketan',0,1,'2017-11-02 11:22:23.289142');
+INSERT INTO `auth_user` VALUES (1,'pbkdf2_sha256$36000$o5LsPnPFBiGi$te/mDIky1/JFFKmZ137Ge8VCHVcRkRnfSpEA1c4QOkY=','2017-11-01 10:33:29.865515',1,'Mayank','','','mayank.hawk@gmail.com',1,1,'2017-10-30 19:13:31.133318'),(2,'pbkdf2_sha256$36000$ErP3pCCuHU76$1DFWSaPQUADBZHrKcvi1G7y93peMlzS+mwZChzHv2T0=','2017-11-02 20:03:17.868807',1,'Secretary','','','',1,1,'2017-11-01 04:08:39.189978'),(3,'pbkdf2_sha256$36000$ixudnPhcXB9O$EJ9Ca65ov4o97DdpcVvtM9WcmKDh/ax7WJQ7eao8fDs=',NULL,1,'Joint_secretary1','','','',1,1,'2017-11-01 04:09:23.790501'),(4,'pbkdf2_sha256$36000$vhGhqA48chdl$G3h0796iCollKAIPYX5nrbTAOfUsLmHFb0ROTtJDTzU=',NULL,1,'Joint_secretary2','','','',1,1,'2017-11-01 04:10:11.352020'),(6,'pbkdf2_sha256$36000$GtTKcWvP6S62$y6r7qeWSEpi8BCdzNCxgh8aGi6fHNMmGVUyvU7ppVfI=','2017-11-01 15:23:23.593309',0,'karan','','','karan',0,1,'2017-11-01 05:42:25.501929'),(7,'pbkdf2_sha256$36000$KRnjce28mpAk$dxUK/wL/pf714QFpgCKtVjGJGBarjum+P8ofiplw+l8=','2017-11-02 19:54:32.114096',0,'Dhawal','','','Dhawal',0,1,'2017-11-01 05:49:29.047051'),(42,'pbkdf2_sha256$36000$UWinV9i17YHq$xk62k/e5wCTy0kBSOJAKKsP1FPkweH9Nb0YZAz+YzYc=','2017-11-02 19:59:20.452027',0,'ketan','','','ketan',1,1,'2017-11-02 11:22:23.289142'),(43,'pbkdf2_sha256$36000$38fz3qp7WnHR$Z8Ecd6yfZ08Q3dlJM7QyPiQdVSWpw+FungvHhXp/maQ=','2017-11-02 19:59:56.010090',0,'anjali@anjali','','','anjali@anjali',0,1,'2017-11-02 19:58:35.424750');
 /*!40000 ALTER TABLE `auth_user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -260,7 +260,7 @@ CREATE TABLE `core_team` (
 
 LOCK TABLES `core_team` WRITE;
 /*!40000 ALTER TABLE `core_team` DISABLE KEYS */;
-INSERT INTO `core_team` VALUES (1,1,'dummy');
+INSERT INTO `core_team` VALUES (1,1,'dummy'),(42,NULL,'Accountant');
 /*!40000 ALTER TABLE `core_team` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -371,7 +371,7 @@ CREATE TABLE `django_session` (
 
 LOCK TABLES `django_session` WRITE;
 /*!40000 ALTER TABLE `django_session` DISABLE KEYS */;
-INSERT INTO `django_session` VALUES ('eaasr7sa4hgicbiskvtqq336nciczvud','OTc3ZjlhZWIyY2MxYTMzZWQ5MDYyMzU2NzI5OWE3ZmJkZGY1YmFjZjp7fQ==','2017-11-14 15:29:14.652139'),('f3sexu5zxtfrlkrn05t9opw1se59xgsh','MjVmODI1YTg5NGZlYzFhYThiM2FjZjI4NGZhYjJjZjFhYjE2OTdhODp7Il9hdXRoX3VzZXJfaWQiOiIyIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiIxYmYwOTg5ZmFmOTFlOTllYTM3MDk3YzE4OWIyZWQ4MTc1OGUxMzQ1In0=','2017-11-16 11:45:44.879727');
+INSERT INTO `django_session` VALUES ('eaasr7sa4hgicbiskvtqq336nciczvud','OTc3ZjlhZWIyY2MxYTMzZWQ5MDYyMzU2NzI5OWE3ZmJkZGY1YmFjZjp7fQ==','2017-11-14 15:29:14.652139');
 /*!40000 ALTER TABLE `django_session` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -426,7 +426,7 @@ CREATE TABLE `evaluation` (
 
 LOCK TABLES `evaluation` WRITE;
 /*!40000 ALTER TABLE `evaluation` DISABLE KEYS */;
-INSERT INTO `evaluation` VALUES (1,1,1,1),(2,1,15,4);
+INSERT INTO `evaluation` VALUES (1,1,1,1),(1,42,15,2),(2,1,15,4),(2,42,15,2);
 /*!40000 ALTER TABLE `evaluation` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -482,7 +482,7 @@ CREATE TABLE `issue_log` (
   CONSTRAINT `issue_log_ibfk_2` FOREIGN KEY (`issued_by`) REFERENCES `admin` (`admin_id`),
   CONSTRAINT `issue_log_ibfk_3` FOREIGN KEY (`issued_to`) REFERENCES `user` (`user_id`),
   CONSTRAINT `issue_log_ibfk_4` FOREIGN KEY (`Tool_id`) REFERENCES `tools` (`tool_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -491,7 +491,7 @@ CREATE TABLE `issue_log` (
 
 LOCK TABLES `issue_log` WRITE;
 /*!40000 ALTER TABLE `issue_log` DISABLE KEYS */;
-INSERT INTO `issue_log` VALUES (1,1,1,1,'2017-11-01','2017-11-01'),(2,1,1,1,'0000-00-00','2017-11-01'),(3,1,1,1,'0000-00-00',NULL);
+INSERT INTO `issue_log` VALUES (1,1,1,1,'2017-11-01','2017-11-01'),(2,1,1,1,'0000-00-00','2017-11-01'),(3,1,1,1,'0000-00-00',NULL),(4,1,2,42,'2017-11-02',NULL);
 /*!40000 ALTER TABLE `issue_log` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -564,7 +564,7 @@ CREATE TABLE `post` (
   PRIMARY KEY (`post_id`),
   KEY `Admin_id` (`Admin_id`),
   CONSTRAINT `post_ibfk_1` FOREIGN KEY (`Admin_id`) REFERENCES `admin` (`admin_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -573,8 +573,35 @@ CREATE TABLE `post` (
 
 LOCK TABLES `post` WRITE;
 /*!40000 ALTER TABLE `post` DISABLE KEYS */;
-INSERT INTO `post` VALUES (1,1,'2017-11-01','ajbflbva;bvdsjvdsovbdubvdncvdsjlvbds;vbskvjbds;vbvkjds vkjdsbv;odsbvdskjvbdskjvbdsovbX.vds;ovuebwvkjjdsbvkdsJbvsx;jvbdskjvbkjvbDSvbDSkv svkjbSvjsBv.jZXbvlzxbvk;sJbvadsbvDSJKJbvldsbvlDSvLvbs:OvbDSLJvbdsljjvbdsvbdsjvbDSvkjzbv;ljbsv;lDBSvl.sdbvSDvd',NULL),(2,2,'2017-11-02','This is a dummy post;',NULL);
+INSERT INTO `post` VALUES (2,2,'2017-11-02','This is a dummy post;',NULL),(3,2,'2017-11-01','Dummy again',NULL);
 /*!40000 ALTER TABLE `post` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `projects`
+--
+
+DROP TABLE IF EXISTS `projects`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `projects` (
+  `pro_id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(25) DEFAULT NULL,
+  `Team_id` int(11) DEFAULT NULL,
+  `fund` int(11) DEFAULT NULL,
+  `is_funded` int(11) DEFAULT NULL,
+  PRIMARY KEY (`pro_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `projects`
+--
+
+LOCK TABLES `projects` WRITE;
+/*!40000 ALTER TABLE `projects` DISABLE KEYS */;
+INSERT INTO `projects` VALUES (1,'dummy',1,10,1),(4,'Google',1,458,0);
+/*!40000 ALTER TABLE `projects` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -615,8 +642,9 @@ CREATE TABLE `sponsor` (
   `name` varchar(16) DEFAULT NULL,
   `description` mediumtext,
   `contact` int(10) DEFAULT NULL,
+  `email` varchar(25) DEFAULT NULL,
   PRIMARY KEY (`sponsor_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -625,6 +653,7 @@ CREATE TABLE `sponsor` (
 
 LOCK TABLES `sponsor` WRITE;
 /*!40000 ALTER TABLE `sponsor` DISABLE KEYS */;
+INSERT INTO `sponsor` VALUES (1,'dummy','sdfsf',198696,'asff@aaddf'),(4,'Mayank','dummy',2147483647,'mayank.kumar.cse15@iitbhu');
 /*!40000 ALTER TABLE `sponsor` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -690,17 +719,17 @@ DROP TABLE IF EXISTS `transactions`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `transactions` (
-  `trans_id` int(11) NOT NULL,
+  `trans_id` int(11) NOT NULL AUTO_INCREMENT,
   `Sponser_id` int(11) DEFAULT NULL,
-  `Team_id` int(11) DEFAULT NULL,
   `status` varchar(10) DEFAULT NULL,
   `ref_no` varchar(16) DEFAULT NULL,
+  `Project_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`trans_id`),
-  KEY `fk_tm` (`Team_id`),
   KEY `Sponser_id` (`Sponser_id`),
-  CONSTRAINT `fk_tm` FOREIGN KEY (`Team_id`) REFERENCES `team` (`team_id`),
-  CONSTRAINT `transactions_ibfk_1` FOREIGN KEY (`Sponser_id`) REFERENCES `sponsor` (`sponsor_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  KEY `Project_id` (`Project_id`),
+  CONSTRAINT `transactions_ibfk_1` FOREIGN KEY (`Sponser_id`) REFERENCES `sponsor` (`sponsor_id`),
+  CONSTRAINT `transactions_ibfk_2` FOREIGN KEY (`Project_id`) REFERENCES `projects` (`pro_id`) ON DELETE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -709,6 +738,7 @@ CREATE TABLE `transactions` (
 
 LOCK TABLES `transactions` WRITE;
 /*!40000 ALTER TABLE `transactions` DISABLE KEYS */;
+INSERT INTO `transactions` VALUES (2,1,'verified','1236',1);
 /*!40000 ALTER TABLE `transactions` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -742,7 +772,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,1,'dummy','M','CSE',3,NULL,2147483647,NULL),(42,1,'Ketan','M','CSE',4,'ketan',966566468,'Automobile');
+INSERT INTO `user` VALUES (1,1,'dummy','M','CSE',3,NULL,2147483647,NULL),(42,1,'Ketan','M','CSE',4,'ketan',966566468,'Automobile'),(43,1,'anjali','Female','CSE',3,'anjali@anjali',2147483647,'BAJA');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -755,4 +785,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-11-02 17:37:56
+-- Dump completed on 2017-11-03  1:47:12
