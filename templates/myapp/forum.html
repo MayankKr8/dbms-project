@@ -30,6 +30,7 @@
   		<a href="/help_portal/">Attend Querries</a>
       <a href="/quiz/">Add a quiz</a>
       <a href="/scores/">Update Scores</a>
+       <a href="/profunds/">Manage Projects and funds</a>
 	</div>
 	{%  endblock %}
 	{% endif %}
@@ -38,7 +39,7 @@
 
 {% block content %}
 {% if user.is_authenticated %}
-{% if user.is_staff %}
+{% if user.is_superuser %}
 <div id="main">
         <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
 </div>

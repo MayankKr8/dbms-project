@@ -141,7 +141,7 @@ CREATE TABLE `auth_user` (
   `date_joined` datetime(6) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -150,7 +150,7 @@ CREATE TABLE `auth_user` (
 
 LOCK TABLES `auth_user` WRITE;
 /*!40000 ALTER TABLE `auth_user` DISABLE KEYS */;
-INSERT INTO `auth_user` VALUES (1,'pbkdf2_sha256$36000$o5LsPnPFBiGi$te/mDIky1/JFFKmZ137Ge8VCHVcRkRnfSpEA1c4QOkY=','2017-11-01 10:33:29.865515',1,'Mayank','','','mayank.hawk@gmail.com',1,1,'2017-10-30 19:13:31.133318'),(2,'pbkdf2_sha256$36000$ErP3pCCuHU76$1DFWSaPQUADBZHrKcvi1G7y93peMlzS+mwZChzHv2T0=','2017-11-02 20:03:17.868807',1,'Secretary','','','',1,1,'2017-11-01 04:08:39.189978'),(3,'pbkdf2_sha256$36000$ixudnPhcXB9O$EJ9Ca65ov4o97DdpcVvtM9WcmKDh/ax7WJQ7eao8fDs=',NULL,1,'Joint_secretary1','','','',1,1,'2017-11-01 04:09:23.790501'),(4,'pbkdf2_sha256$36000$vhGhqA48chdl$G3h0796iCollKAIPYX5nrbTAOfUsLmHFb0ROTtJDTzU=',NULL,1,'Joint_secretary2','','','',1,1,'2017-11-01 04:10:11.352020'),(6,'pbkdf2_sha256$36000$GtTKcWvP6S62$y6r7qeWSEpi8BCdzNCxgh8aGi6fHNMmGVUyvU7ppVfI=','2017-11-01 15:23:23.593309',0,'karan','','','karan',0,1,'2017-11-01 05:42:25.501929'),(7,'pbkdf2_sha256$36000$KRnjce28mpAk$dxUK/wL/pf714QFpgCKtVjGJGBarjum+P8ofiplw+l8=','2017-11-02 19:54:32.114096',0,'Dhawal','','','Dhawal',0,1,'2017-11-01 05:49:29.047051'),(42,'pbkdf2_sha256$36000$UWinV9i17YHq$xk62k/e5wCTy0kBSOJAKKsP1FPkweH9Nb0YZAz+YzYc=','2017-11-02 19:59:20.452027',0,'ketan','','','ketan',1,1,'2017-11-02 11:22:23.289142'),(43,'pbkdf2_sha256$36000$38fz3qp7WnHR$Z8Ecd6yfZ08Q3dlJM7QyPiQdVSWpw+FungvHhXp/maQ=','2017-11-02 19:59:56.010090',0,'anjali@anjali','','','anjali@anjali',0,1,'2017-11-02 19:58:35.424750');
+INSERT INTO `auth_user` VALUES (1,'pbkdf2_sha256$36000$o5LsPnPFBiGi$te/mDIky1/JFFKmZ137Ge8VCHVcRkRnfSpEA1c4QOkY=','2017-11-01 10:33:29.865515',1,'Mayank','','','mayank.hawk@gmail.com',1,1,'2017-10-30 19:13:31.133318'),(2,'pbkdf2_sha256$36000$ErP3pCCuHU76$1DFWSaPQUADBZHrKcvi1G7y93peMlzS+mwZChzHv2T0=','2017-11-03 08:20:11.790502',1,'Secretary','','','',1,1,'2017-11-01 04:08:39.189978'),(3,'pbkdf2_sha256$36000$ixudnPhcXB9O$EJ9Ca65ov4o97DdpcVvtM9WcmKDh/ax7WJQ7eao8fDs=',NULL,1,'Joint_secretary1','','','',1,1,'2017-11-01 04:09:23.790501'),(4,'pbkdf2_sha256$36000$vhGhqA48chdl$G3h0796iCollKAIPYX5nrbTAOfUsLmHFb0ROTtJDTzU=',NULL,1,'Joint_secretary2','','','',1,1,'2017-11-01 04:10:11.352020'),(44,'pbkdf2_sha256$36000$upv9N224gkdv$7Uz+er/vONmzjRkk/hZiByDOqeyRNT6YN9iWa0sIF/Y=','2017-11-03 08:19:02.285569',0,'ketan@ketan','','','ketan@ketan',1,1,'2017-11-03 07:02:18.894188'),(45,'pbkdf2_sha256$36000$VqPqxXnhwsmU$6dKppFEpdzp27rbv/K5UDwg+PzjGwOvPYjMfFn3Oqls=',NULL,0,'dhawal@dhawal','','','dhawal@dhawal',0,1,'2017-11-03 07:03:14.311501'),(47,'pbkdf2_sha256$36000$vPZ9wSty5dBM$eUzF/0YVpmUFVQNpnfCGlxDgmX23CkTvbnzulFqVTXE=',NULL,0,'anjali@anjali','','','anjali@anjali',0,1,'2017-11-03 07:04:34.001760');
 /*!40000 ALTER TABLE `auth_user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -232,7 +232,7 @@ CREATE TABLE `contacts` (
 
 LOCK TABLES `contacts` WRITE;
 /*!40000 ALTER TABLE `contacts` DISABLE KEYS */;
-INSERT INTO `contacts` VALUES ('Mayank',89798,'mayak','Secy','IIT ');
+INSERT INTO `contacts` VALUES ('Mayank',89798,'mayak','Secy','IIT '),('Shubahm',2147483647,'shubam@shubam','Secy','FMC'),('Raj',8965,'raj@raj','Secy','SNTC');
 /*!40000 ALTER TABLE `contacts` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -260,8 +260,32 @@ CREATE TABLE `core_team` (
 
 LOCK TABLES `core_team` WRITE;
 /*!40000 ALTER TABLE `core_team` DISABLE KEYS */;
-INSERT INTO `core_team` VALUES (1,1,'dummy'),(42,NULL,'Accountant');
+INSERT INTO `core_team` VALUES (44,1,'Accountant');
 /*!40000 ALTER TABLE `core_team` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `depart`
+--
+
+DROP TABLE IF EXISTS `depart`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `depart` (
+  `d_id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(3) DEFAULT NULL,
+  PRIMARY KEY (`d_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `depart`
+--
+
+LOCK TABLES `depart` WRITE;
+/*!40000 ALTER TABLE `depart` DISABLE KEYS */;
+INSERT INTO `depart` VALUES (1,'CSE');
+/*!40000 ALTER TABLE `depart` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -426,7 +450,7 @@ CREATE TABLE `evaluation` (
 
 LOCK TABLES `evaluation` WRITE;
 /*!40000 ALTER TABLE `evaluation` DISABLE KEYS */;
-INSERT INTO `evaluation` VALUES (1,1,1,1),(1,42,15,2),(2,1,15,4),(2,42,15,2);
+INSERT INTO `evaluation` VALUES (4,44,12,1);
 /*!40000 ALTER TABLE `evaluation` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -448,7 +472,7 @@ CREATE TABLE `help` (
   PRIMARY KEY (`help_id`),
   KEY `Admin_id` (`Admin_id`),
   CONSTRAINT `help_ibfk_1` FOREIGN KEY (`Admin_id`) REFERENCES `admin` (`admin_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -457,7 +481,7 @@ CREATE TABLE `help` (
 
 LOCK TABLES `help` WRITE;
 /*!40000 ALTER TABLE `help` DISABLE KEYS */;
-INSERT INTO `help` VALUES (5,2,'Mayank',NULL,'mayank.hawk@gmal.com','Unresolved','Dummy Query');
+INSERT INTO `help` VALUES (5,2,'Mayank',NULL,'mayank.hawk@gmal.com','Unresolved','Dummy Query'),(6,2,'Praveen',NULL,'Praveen@Praveen','Resolved','This is lorem ipsum'),(7,2,'Praveen',NULL,'Praveen@Praveen','Resolved','Praveen again');
 /*!40000 ALTER TABLE `help` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -491,7 +515,6 @@ CREATE TABLE `issue_log` (
 
 LOCK TABLES `issue_log` WRITE;
 /*!40000 ALTER TABLE `issue_log` DISABLE KEYS */;
-INSERT INTO `issue_log` VALUES (1,1,1,1,'2017-11-01','2017-11-01'),(2,1,1,1,'0000-00-00','2017-11-01'),(3,1,1,1,'0000-00-00',NULL),(4,1,2,42,'2017-11-02',NULL);
 /*!40000 ALTER TABLE `issue_log` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -544,7 +567,7 @@ CREATE TABLE `orders` (
 
 LOCK TABLES `orders` WRITE;
 /*!40000 ALTER TABLE `orders` DISABLE KEYS */;
-INSERT INTO `orders` VALUES ('dummy','red',45,1,'2017-11-01'),('Dummy2','blue',69,1,'2017-11-01');
+INSERT INTO `orders` VALUES ('Dummy Orde','Purchased',896,44,'2017-11-03');
 /*!40000 ALTER TABLE `orders` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -564,7 +587,7 @@ CREATE TABLE `post` (
   PRIMARY KEY (`post_id`),
   KEY `Admin_id` (`Admin_id`),
   CONSTRAINT `post_ibfk_1` FOREIGN KEY (`Admin_id`) REFERENCES `admin` (`admin_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -590,8 +613,10 @@ CREATE TABLE `projects` (
   `Team_id` int(11) DEFAULT NULL,
   `fund` int(11) DEFAULT NULL,
   `is_funded` int(11) DEFAULT NULL,
-  PRIMARY KEY (`pro_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+  PRIMARY KEY (`pro_id`),
+  KEY `Team_id` (`Team_id`),
+  CONSTRAINT `projects_ibfk_1` FOREIGN KEY (`Team_id`) REFERENCES `team` (`team_id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -600,7 +625,7 @@ CREATE TABLE `projects` (
 
 LOCK TABLES `projects` WRITE;
 /*!40000 ALTER TABLE `projects` DISABLE KEYS */;
-INSERT INTO `projects` VALUES (1,'dummy',1,10,1),(4,'Google',1,458,0);
+INSERT INTO `projects` VALUES (5,'Dummy Project1',1,10,1),(7,'Dummy Project3',3,10,0),(8,'Dummy Project4',4,10,0),(9,'Dummy Project4',4,10,0);
 /*!40000 ALTER TABLE `projects` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -617,7 +642,7 @@ CREATE TABLE `quiz` (
   `date` date DEFAULT NULL,
   `comments` mediumtext,
   PRIMARY KEY (`quiz_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -626,7 +651,7 @@ CREATE TABLE `quiz` (
 
 LOCK TABLES `quiz` WRITE;
 /*!40000 ALTER TABLE `quiz` DISABLE KEYS */;
-INSERT INTO `quiz` VALUES (1,20,'1973-12-30','good'),(2,35,'2017-11-01',NULL),(3,18,'2017-11-02',NULL);
+INSERT INTO `quiz` VALUES (1,20,'1973-12-30','good'),(2,35,'2017-11-01',NULL),(3,18,'2017-11-02',NULL),(4,40,'2017-11-03',NULL),(5,40,'2017-11-03','trila');
 /*!40000 ALTER TABLE `quiz` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -644,7 +669,7 @@ CREATE TABLE `sponsor` (
   `contact` int(10) DEFAULT NULL,
   `email` varchar(25) DEFAULT NULL,
   PRIMARY KEY (`sponsor_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -653,8 +678,32 @@ CREATE TABLE `sponsor` (
 
 LOCK TABLES `sponsor` WRITE;
 /*!40000 ALTER TABLE `sponsor` DISABLE KEYS */;
-INSERT INTO `sponsor` VALUES (1,'dummy','sdfsf',198696,'asff@aaddf'),(4,'Mayank','dummy',2147483647,'mayank.kumar.cse15@iitbhu');
+INSERT INTO `sponsor` VALUES (1,'dummy','sdfsf',198696,'asff@aaddf'),(4,'Mayank','dummy',2147483647,'mayank.kumar.cse15@iitbhu'),(5,'deevashver','dummy sponsor',96958,'dev@deev');
 /*!40000 ALTER TABLE `sponsor` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `status_fund`
+--
+
+DROP TABLE IF EXISTS `status_fund`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `status_fund` (
+  `stat_id` int(11) NOT NULL AUTO_INCREMENT,
+  `stat` varchar(10) DEFAULT NULL,
+  PRIMARY KEY (`stat_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `status_fund`
+--
+
+LOCK TABLES `status_fund` WRITE;
+/*!40000 ALTER TABLE `status_fund` DISABLE KEYS */;
+INSERT INTO `status_fund` VALUES (1,'verified'),(2,'unverified'),(3,'returned');
+/*!40000 ALTER TABLE `status_fund` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -670,8 +719,7 @@ CREATE TABLE `team` (
   `mentor_id` int(11) DEFAULT NULL,
   `contact` int(10) DEFAULT NULL,
   PRIMARY KEY (`team_id`),
-  KEY `mentor_id` (`mentor_id`),
-  CONSTRAINT `team_ibfk_1` FOREIGN KEY (`mentor_id`) REFERENCES `user` (`user_id`)
+  KEY `mentor_id` (`mentor_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -681,7 +729,7 @@ CREATE TABLE `team` (
 
 LOCK TABLES `team` WRITE;
 /*!40000 ALTER TABLE `team` DISABLE KEYS */;
-INSERT INTO `team` VALUES (1,'dummy',1,2147483647);
+INSERT INTO `team` VALUES (1,'Team1',NULL,NULL),(2,'Team2',NULL,NULL),(3,'Team3',NULL,NULL),(4,'Team4',NULL,NULL);
 /*!40000 ALTER TABLE `team` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -698,7 +746,7 @@ CREATE TABLE `tools` (
   `status` varchar(10) DEFAULT NULL,
   `price` int(11) DEFAULT NULL,
   PRIMARY KEY (`tool_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -707,7 +755,7 @@ CREATE TABLE `tools` (
 
 LOCK TABLES `tools` WRITE;
 /*!40000 ALTER TABLE `tools` DISABLE KEYS */;
-INSERT INTO `tools` VALUES (1,'dummy','issued',45);
+INSERT INTO `tools` VALUES (1,'dummy','issued',45),(2,'Hammer','Purchased',569);
 /*!40000 ALTER TABLE `tools` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -721,15 +769,17 @@ DROP TABLE IF EXISTS `transactions`;
 CREATE TABLE `transactions` (
   `trans_id` int(11) NOT NULL AUTO_INCREMENT,
   `Sponser_id` int(11) DEFAULT NULL,
-  `status` varchar(10) DEFAULT NULL,
+  `status` int(11) DEFAULT NULL,
   `ref_no` varchar(16) DEFAULT NULL,
   `Project_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`trans_id`),
   KEY `Sponser_id` (`Sponser_id`),
   KEY `Project_id` (`Project_id`),
+  KEY `status` (`status`),
   CONSTRAINT `transactions_ibfk_1` FOREIGN KEY (`Sponser_id`) REFERENCES `sponsor` (`sponsor_id`),
-  CONSTRAINT `transactions_ibfk_2` FOREIGN KEY (`Project_id`) REFERENCES `projects` (`pro_id`) ON DELETE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+  CONSTRAINT `transactions_ibfk_2` FOREIGN KEY (`Project_id`) REFERENCES `projects` (`pro_id`) ON DELETE NO ACTION,
+  CONSTRAINT `transactions_ibfk_3` FOREIGN KEY (`status`) REFERENCES `status_fund` (`stat_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -738,7 +788,7 @@ CREATE TABLE `transactions` (
 
 LOCK TABLES `transactions` WRITE;
 /*!40000 ALTER TABLE `transactions` DISABLE KEYS */;
-INSERT INTO `transactions` VALUES (2,1,'verified','1236',1);
+INSERT INTO `transactions` VALUES (5,5,1,'1234',5),(6,4,3,'5698',5);
 /*!40000 ALTER TABLE `transactions` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -754,15 +804,17 @@ CREATE TABLE `user` (
   `Team_id` int(11) DEFAULT NULL,
   `name` varchar(16) DEFAULT NULL,
   `gender` varchar(10) DEFAULT NULL,
-  `department` varchar(3) DEFAULT NULL,
+  `department` int(11) DEFAULT NULL,
   `year` int(11) DEFAULT NULL,
   `email` varchar(20) DEFAULT NULL,
   `contact` int(10) DEFAULT NULL,
   `interest` mediumtext,
   PRIMARY KEY (`user_id`),
   KEY `Team_id` (`Team_id`),
+  KEY `department` (`department`),
   CONSTRAINT `user_ibfk_1` FOREIGN KEY (`Team_id`) REFERENCES `team` (`team_id`),
-  CONSTRAINT `user_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`) ON DELETE CASCADE
+  CONSTRAINT `user_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `user_ibfk_3` FOREIGN KEY (`department`) REFERENCES `depart` (`d_id`) ON DELETE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -772,7 +824,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,1,'dummy','M','CSE',3,NULL,2147483647,NULL),(42,1,'Ketan','M','CSE',4,'ketan',966566468,'Automobile'),(43,1,'anjali','Female','CSE',3,'anjali@anjali',2147483647,'BAJA');
+INSERT INTO `user` VALUES (44,1,'Ketan','Male',1,1,'ketan@ketan',2147483647,'Automobile'),(45,2,'Dhawal','Male',1,2,'dhawal@dhawal',2147483647,'Automobile'),(47,4,'Anjali','Female',1,4,'anjali@anjali',2147483647,'Automobile');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -785,4 +837,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-11-03  1:47:12
+-- Dump completed on 2017-11-03 13:52:14

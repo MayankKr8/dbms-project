@@ -30,7 +30,7 @@
       <a href="/help_portal/">Attend Querries</a>
       <a href="/quiz/">Add a quiz</a>
       <a href="/scores/">Update Scores</a>
-      <a href="/create_post/">Create a post</a>
+      <a href="/profunds/">Manage Projects and funds</a>
   </div>
   {%  endblock %}
   {% endif %}
@@ -91,6 +91,7 @@
       <th>Sponser Id</th>
       <th>Status</th>
       <th>Reference No</th>
+      <th>Project Id</th>
     </tr>
     {% for product in products %}
      <tr>
@@ -98,6 +99,7 @@
       <td>{{ product.sid }}</td>
       <td>{{ product.stat }}</td>
       <td>{{ product.ref }}</td>
+      <td>{{ product.pid }}</td>
     </tr>
      {% endfor %}
   </table>

@@ -16,6 +16,9 @@
 {%  endblock %}
 {% block content %}
 <form action="/submit_query/" method="post">{% csrf_token %}
+{% if inserted %}
+<center><p>Success!</p></center>
+{% endif %}
 <div id="sp">Please Fill up this form</div>
 <div class="containerr">
 <label><b>Full Name</b></label>

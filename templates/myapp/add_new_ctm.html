@@ -30,7 +30,7 @@
       <a href="/help_portal/">Attend Querries</a>
       <a href="/quiz/">Add a quiz</a>
       <a href="/scores/">Update Scores</a>
-      <a href="/create_post/">Create a post</a>
+      <a href="/profunds/">Manage Projects and funds</a>
   </div>
   {%  endblock %}
   {% endif %}
@@ -42,6 +42,9 @@
 {% if user.is_superuser %}
 <div id="main">
   <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
+  {% if inserted %}
+<center><p>Success!</p></center>
+{% endif %}
 </div>
  <form action="/create_ctm/" method="post">{% csrf_token %}
   <div id="sp">Add a core team member</div>

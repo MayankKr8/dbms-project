@@ -70,6 +70,9 @@ span.psw {
 </style>
 
 <div class="jumbotron">
+{% if expired %}
+<center><p>Already logged in</p></center>
+{% endif %}
 {% if notloggedin %}
 <center><p>Incorrect Credentials. Try Again</p></center>
 {% endif %}

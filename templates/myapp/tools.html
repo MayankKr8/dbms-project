@@ -30,6 +30,7 @@
   		<a href="/help_portal/">Attend Querries</a>
       <a href="/quiz/">Add a quiz</a>
         <a href="/scores/">Update Scores</a>
+         <a href="/profunds/">Manage Projects and funds</a>
 	</div>
 	{%  endblock %}
 	{% endif %}
@@ -51,7 +52,7 @@
     <li><a href="/users/">Users</a></li>
   </ul>
 </div>
-{% if user.is_staff %}
+{% if user.is_superuser %}
 <div class="container">
   <form class="form-inline" action="/add_tool1/" method="post">{% csrf_token %}
     <div class="form-group">

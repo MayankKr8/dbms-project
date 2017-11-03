@@ -31,17 +31,21 @@ def login_handler(request):
     email = request.POST.get('uname', None)
     password = request.POST.get('psw', None)
     template = loader.get_template('myapp/Login.html')
-    if email and password:
-        user = authenticate(username=email, password=password)
-        if user:
-              login(request,user)
-              return HttpResponseRedirect('/')
-        else:
-              context = {'notloggedin':1}
-              return HttpResponse(template.render(context,request))
+    context = {'expired':1}
+    if request.user.is_authenticated:
+        return HttpResponse(template.render(context,request))
     else:
-         context = {'notloggedin':1}
-         return HttpResponse(template.render(context,request))
+        if email and password:
+            user = authenticate(username=email, password=password)
+            if user:
+                login(request,user)
+                return HttpResponseRedirect('/')
+            else:
+                context = {'notloggedin':1}
+                return HttpResponse(template.render(context,request))
+        else:
+             context = {'notloggedin':1}
+             return HttpResponse(template.render(context,request))
 
 def logout_handler(request):
       logout(request)
@@ -138,6 +142,10 @@ def create_user(request):
     contact = request.POST.get('mobile', None)
     gender = request.POST.get('gender', None)
     Dept = request.POST.get('dpt', None)
+    cursor=connection.cursor()
+    cursor.execute("""select d_id from depart where name = %s""",[Dept])
+    for row in cursor:
+            d_id=row[0]
     year = request.POST.get('year', None)
     Interest = request.POST.get('Interest', None)
     Team = request.POST.get('t_id', None)
@@ -151,7 +159,7 @@ def create_user(request):
               user.save()
               cursor=connection.cursor()
               print(type(user.id))
-              cursor.execute("""insert into  user (user_id, Team_id,name,gender,department,year,email,contact,interest)VALUES(%s,%s,%s, %s, %s,%s,%s,%s,%s)""",(user.id, int(Team), name, gender, Dept, int(year), email, int(contact), Interest ))
+              cursor.execute("""insert into  user (user_id, Team_id,name,gender,department,year,email,contact,interest)VALUES(%s,%s,%s, %s, %s,%s,%s,%s,%s)""",(user.id, int(Team), name, gender, d_id, int(year), email, int(contact), Interest ))
               context = {
                   'usercreated': 1,
                   }
@@ -164,6 +172,8 @@ def create_user(request):
               return HttpResponse(template.render(context,request))
 def remove_user1(request):
     username = request.POST.get('uname', None)
+    template = loader.get_template('myapp/add_new_ctm.html')
+    context = {'inserted':0}
     if username:
         user, created = User.objects.get_or_create(username=username, email=username)
         if created:
@@ -173,10 +183,13 @@ def remove_user1(request):
         else:
               cursor=connection.cursor() 
               cursor.execute("""delete from auth_user where username=%s""",[username])
-              return HttpResponseRedirect('/new_ctm/')            
+              context = {'inserted':1}
+              return HttpResponse(template.render(context,request))            
 def create_ctm(request):
       username = request.POST.get('uname', None)
       pos = request.POST.get('pos', None)
+      template = loader.get_template('myapp/add_new_ctm.html')
+      context = {'inserted':0}
       if username:
         user, created = User.objects.get_or_create(username=username, email=username)
         if created:
@@ -186,11 +199,17 @@ def create_ctm(request):
         else:
               user.is_staff = True
               user.save()
-              cursor=connection.cursor() 
-              cursor.execute("""insert into core_team(User_id,position)VALUES(%s,%s)""",(user.id,pos))
-              return HttpResponseRedirect('/new_ctm/')
+              cursor=connection.cursor()
+              cursor.execute("""select Team_id from user where user_id  = %s""",[user.id])
+              for row in cursor:
+                  tid  =  row[0]              
+              cursor.execute("""insert into core_team(User_id,Team_id,position)VALUES(%s,%s,%s)""",(user.id,tid,pos))
+              context = {'inserted':1}
+              return HttpResponse(template.render(context,request))
 def remove_ctm1(request):
       username = request.POST.get('uname', None)
+      template = loader.get_template('myapp/add_new_ctm.html')
+      context = {'inserted':0}
       if username:
         user, created = User.objects.get_or_create(username=username, email=username)
         if created:
@@ -203,7 +222,8 @@ def remove_ctm1(request):
               user.save()
               cursor=connection.cursor() 
               cursor.execute("""delete from core_team where User_id  = %s""",[user.id])
-              return HttpResponseRedirect('/new_ctm/')
+              context = {'inserted':1}
+              return HttpResponse(template.render(context,request))
 def tools(request):
       query = """select a.tool_id,name,status,price,log_id,issued_by,issued_to,date_of_issue,date_of_return from tools as a left outer join issue_log as b on a.tool_id = b.Tool_id;"""
       template = loader.get_template('myapp/tools.html')
@@ -277,7 +297,7 @@ def contacts(request):
       context['products']=entries
       return HttpResponse(template.render(context,request))
 def users(request):
-      query = """ select user_id,b.name,a.name,gender,department,year,email,a.contact,interest from user as a, team as b where a.Team_id =b.team_id"""
+      query = """ select user_id,b.name,a.name,gender,d.name,year,email,a.contact,interest from user as a, team as b, depart as d where a.Team_id =b.team_id and a.department = d.d_id"""
       template = loader.get_template('myapp/users.html')
       cursor=connection.cursor() 
       cursor.execute(query)
@@ -308,7 +328,7 @@ def users(request):
 def add_quizs(request):
       marks = request.POST.get('marks', None)
       date = request.POST.get('date', None)
-      comment = request.POST.get('cmmnts', None)
+      comment = request.POST.get('cmmts', None)
       cursor=connection.cursor() 
       cursor.execute("""insert into  quiz (marks,date, comments)VALUES(%s, %s, %s)""",(marks,date,comment))
       return HttpResponseRedirect('/quiz/')
@@ -318,24 +338,28 @@ def add_eval(request):
       user_id = request.POST.get('u_id', None)
       marks = request.POST.get('marks', None)
       rank = request.POST.get('rank', None)
-      cursor=connection.cursor() 
+      template = loader.get_template('myapp/Scorecard.html')
+      cursor=connection.cursor()
+      context = {'inserted':1}
       cursor.execute("""insert into  evaluation (Quiz_id, User_id,marks, rank)VALUES(%s, %s, %s, %s)""",(quiz_id,user_id,marks,rank))
-      return HttpResponseRedirect('/scores/')
+      return HttpResponse(template.render(context,request))
 def submit_query(request):
       name = request.POST.get('name', None)
       email = request.POST.get('email', None)
       contact = request.POST.get('contact', None)
       query = request.POST.get('query', None)
+      template = loader.get_template('myapp/contactus.html')
       cursor=connection.cursor() 
       cursor.execute("""insert into  help (name,contact,email,content)VALUES(%s, %s, %s, %s)""",(name,contact,email,query))
-      return HttpResponseRedirect('/contactus/')
+      context = {'inserted':1}
+      return HttpResponse(template.render(context,request))
 def update_help(request):
       hid = request.POST.get('id', None)
       stat = request.POST.get('status', None)
       aid = request.user.id
       print(stat)
       cursor=connection.cursor() 
-      cursor.execute("""update help set status = %s, Admin_id = %s""",(stat,aid))
+      cursor.execute("""update help set status = %s, Admin_id = %s where help_id =%s""",(stat,aid,int(hid)))
       return HttpResponseRedirect('/help_portal/')
 def create_post(request):
       pid = request.user.id
@@ -357,10 +381,10 @@ def add_order(request):
       name = request.POST.get('name', None)
       stat = request.POST.get('stat', None)
       price = request.POST.get('price', None)
-      rqst = request.POST.get('r_id', None)
+      rqst = request.user.id
       dop = request.POST.get('date', None)
       cursor=connection.cursor() 
-      cursor.execute("""insert into orders(name,status,price,request,dop)VALUES( %s,%s,%s,%s,%s)""",(name,stat,int(price),int(rqst),dop))
+      cursor.execute("""insert into orders(name,status,price,request,dop)VALUES( %s,%s,%s,%s,%s)""",(name,stat,int(price),rqst,dop))
       return HttpResponseRedirect('/orders/')
 def add_tool(request):
       name = request.POST.get('name', None)
@@ -411,18 +435,18 @@ def pro(request):
 def rec_fund(request):
       return render(request,'myapp/Fund_Record.html',{})
 def add_fund(request):
-      template = loader.get_template('myapp/manage.html')
+      template = loader.get_template('myapp/Fund_Record.html')
       sid = request.POST.get('sid', None)
       pid = request.POST.get('pid', None)
       tid = request.POST.get('tid', None)
       cursor=connection.cursor() 
-      cursor.execute(""" insert into transactions(sponser_id,ref_no,project_id)VALUES(%s,%s,%s);""",(int(sid),int(tid),int(pid)))
+      cursor.execute(""" insert into transactions(sponser_id,status,ref_no,project_id)VALUES(%s,%s,%s,%s);""",(int(sid),2,int(tid),int(pid)))
       context = {'inserted':1}
       return HttpResponse(template.render(context,request))
 def show_id(request):
       template = loader.get_template('myapp/profile.html')
       cursor=connection.cursor() 
-      cursor.execute(""" select user_id,b.name,a.name,gender,department,year,email,a.contact,interest from user as a, team as b where a.Team_id =b.team_id and user_id=%s""",[request.user.id])
+      cursor.execute(""" select user_id,b.name,a.name,gender,d.name,year,email,a.contact,interest from user as a, team as b, depart as d where a.Team_id =b.team_id and a.department  = d.d_id and user_id=%s""",[request.user.id])
       entries = []
       class users_db:
         def __init__(self,uid,name,team,gender,depart,year,cont,email,inter):
@@ -448,19 +472,20 @@ def show_id(request):
       return HttpResponse(template.render(context,request))
 
 def profunds(request):
-      query = """select * from transactions"""
+      query = """select trans_id,Sponser_id,stat,ref_no,Project_id from transactions,status_fund where status=stat_id"""
       template = loader.get_template('myapp/manage.html')
       cursor=connection.cursor() 
       cursor.execute(query)
       entries = []
       class contacts_db:
-        def __init__(self,tid,sid,stat,ref):
+        def __init__(self,tid,sid,stat,ref,pro):
             self.tid = tid
             self.sid = sid
             self.stat = stat
             self.ref = ref
+            self.pid = pro
       for row in cursor:
-            entries.append(contacts_db(row[0],row[1],row[2],row[3]))
+            entries.append(contacts_db(row[0],row[1],row[2],row[3],row[4]))
       context = {'loggedin':0}
       context['products']=entries
       return HttpResponse(template.render(context,request))
@@ -483,10 +508,28 @@ def remove_proj1(request):
 def verfunds1(request):
       tid = request.POST.get('uname', None)
       template = loader.get_template('myapp/manage.html')
-      cursor=connection.cursor() 
-      cursor.execute(""" update transactions set status = "verified" where trans_id = %s""",[int(tid)])
-      cursor.execute(""" update projects set is_funded = 1 where pro_id = (select Project_id from transactions where trans_id = %s)""",[int(tid)])
+      cursor=connection.cursor()
+      cursor.execute("""select Project_id from transactions where trans_id = %s""",[int(tid)])
+      for row in cursor:
+          pid = row[0]
+      cursor.execute(""" update transactions set status = 3 where Project_id =%s""",[pid])
+      cursor.execute(""" update transactions set status =1  where trans_id = %s""",[int(tid)])
+      cursor.execute(""" update projects set is_funded = 1 where pro_id =%s""",[pid])
       context = {'inserted':1}
+      query = """select trans_id,Sponser_id,stat,ref_no,Project_id from transactions,status_fund where status=stat_id"""
+      cursor.execute(query)
+      entries = []
+      class contacts_db:
+        def __init__(self,tid,sid,stat,ref,pro):
+            self.tid = tid
+            self.sid = sid
+            self.stat = stat
+            self.ref = ref
+            self.pid = pro
+      for row in cursor:
+            entries.append(contacts_db(row[0],row[1],row[2],row[3],row[4]))
+      context = {'loggedin':0}
+      context['products']=entries
       return HttpResponse(template.render(context,request))
 def reg_spo(request):
       return render(request,'myapp/Sponsor_registeration.html',{})
